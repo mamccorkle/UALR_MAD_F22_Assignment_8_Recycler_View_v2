@@ -24,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.ualr.recyclerviewassignment.databinding.ActivityListMultiSelectionBinding;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 // TODO 05. Create a new Adapter class and the corresponding ViewHolder class in a different file. The adapter will be used to populate
@@ -35,12 +37,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Add the binder:
+    private ActivityListMultiSelectionBinding binding;
+
     private FloatingActionButton mFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_multi_selection);
+        binding = ActivityListMultiSelectionBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+//        setContentView(R.layout.activity_list_multi_selection);
         initComponent();
     }
 
