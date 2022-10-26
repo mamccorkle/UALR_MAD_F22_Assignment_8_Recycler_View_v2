@@ -1,10 +1,11 @@
-package com.ualr.recyclerviewassignment.model;;
+package com.ualr.recyclerviewassignment.model;
 
 public class Inbox {
     private String from;
     private String email;
     private String message;
     private String date;
+    private int imageIndex;     // Assign an index value for the users image in an array of image resource values
     private boolean selected;
 
     public Inbox() {
@@ -53,5 +54,13 @@ public class Inbox {
 
     public void toggleSelection() {
         this.selected = !this.selected;
+    }
+
+    // Getter and setter for assigning the user image:
+    public int getImageIndex() {
+        return imageIndex;
+    }
+    public void setImageIndex(int imageIndex) {
+        this.imageIndex = imageIndex;
     }
 }

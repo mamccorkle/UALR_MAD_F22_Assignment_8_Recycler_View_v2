@@ -30,6 +30,7 @@ public class DataGenerator {
             obj.setEmail(Tools.getEmailFromName(obj.getFrom()));
             obj.setMessage(ctx.getResources().getString(R.string.lorem_ipsum));
             obj.setDate(date_arr[randInt(date_arr.length - 1)]);
+            obj.setImageIndex(i);                           // Add reference to the user image set
             items.add(obj);
         }
         Collections.shuffle(items);
@@ -47,6 +48,7 @@ public class DataGenerator {
         obj.setEmail(Tools.getEmailFromName(obj.getFrom()));
         obj.setMessage(ctx.getResources().getString(R.string.lorem_ipsum));
         obj.setDate(date_arr[indexDate]);
+        //obj.setImageIndex(i);                           // TODO: Add reference to the user image set
         return obj;
     }
 }

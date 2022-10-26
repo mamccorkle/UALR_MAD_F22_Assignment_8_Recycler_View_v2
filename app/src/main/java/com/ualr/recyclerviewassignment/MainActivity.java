@@ -20,16 +20,21 @@
 package com.ualr.recyclerviewassignment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
 
+import com.ualr.recyclerviewassignment.Utils.DataGenerator;
+import com.ualr.recyclerviewassignment.adapter.AdapterListBasic;
 import com.ualr.recyclerviewassignment.databinding.ActivityListMultiSelectionBinding;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.ualr.recyclerviewassignment.model.Inbox;
 
-// TODO 05. Create a new Adapter class and the corresponding ViewHolder class in a different file. The adapter will be used to populate
-//  the recyclerView and manage the interaction with the items in the list
+import java.util.List;
+
 // TODO 06. Detect click events on the list items. Implement a new method to toggle items' selection in response to click events
 // TODO 07. Detect click events on the thumbnail located on the left of every list row when the corresponding item is selected.
 //  Implement a new method to delete the corresponding item in the list
@@ -47,14 +52,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityListMultiSelectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        setContentView(R.layout.activity_list_multi_selection);
+        //setContentView(R.layout.activity_list_multi_selection);
+
         initComponent();
     }
 
     private void initComponent() {
         // TODO 01. Generate the item list to be displayed using the DataGenerator class
+        List<Inbox> mailBox = DataGenerator.getInboxData(this);
+        mailBox.addAll(DataGenerator.getInboxData(this));
+
         // TODO 03. Do the setup of a new RecyclerView instance to display the item list properly
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+
         // TODO 04. Define the layout of each item in the list
+        // TODO 05. Create a new Adapter class and the corresponding ViewHolder class in a different file. The adapter will be used to populate
+        //  the recyclerView and manage the interaction with the items in the list
+        AdapterListBasic mAdapter = new AdapterListBasic(this, mailBox);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+
         // TODO 09. Create a new instance of the created Adapter class and bind it to the RecyclerView instance created in step 03
         mFAB = findViewById(R.id.fab);
         mFAB.setOnClickListener(new View.OnClickListener() {
