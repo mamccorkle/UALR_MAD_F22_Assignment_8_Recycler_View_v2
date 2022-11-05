@@ -1,6 +1,7 @@
 package com.ualr.recyclerviewassignment.Utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.ualr.recyclerviewassignment.R;
 import com.ualr.recyclerviewassignment.model.Inbox;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Random;
 
 public class DataGenerator {
-
     private static Random r = new Random();
 
     public static int randInt(int max) {
@@ -41,14 +41,18 @@ public class DataGenerator {
         List<Inbox> items = new ArrayList<>();
         String name_arr[] = ctx.getResources().getStringArray(R.array.people_names);
         String date_arr[] = ctx.getResources().getStringArray(R.array.general_date);
+
         int indexName = randInt(name_arr.length - 1);
         int indexDate = randInt(date_arr.length - 1);
+
         Inbox obj = new Inbox();
+
         obj.setFrom(name_arr[indexName]);
         obj.setEmail(Tools.getEmailFromName(obj.getFrom()));
         obj.setMessage(ctx.getResources().getString(R.string.lorem_ipsum));
         obj.setDate(date_arr[indexDate]);
-        //obj.setImageIndex(i);                           // TODO: Add reference to the user image set
+        obj.setImageIndex(indexName);                // Add reference to the user image set
+
         return obj;
     }
 }

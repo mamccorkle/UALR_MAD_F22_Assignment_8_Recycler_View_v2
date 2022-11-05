@@ -23,38 +23,67 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.ualr.recyclerviewassignment.Utils.DataGenerator;
 import com.ualr.recyclerviewassignment.adapter.AdapterListBasic;
 import com.ualr.recyclerviewassignment.databinding.ActivityListMultiSelectionBinding;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ualr.recyclerviewassignment.model.Inbox;
 
 import java.util.List;
-
-// TODO 06. Detect click events on the list items. Implement a new method to toggle items' selection in response to click events
-// TODO 07. Detect click events on the thumbnail located on the left of every list row when the corresponding item is selected.
-//  Implement a new method to delete the corresponding item in the list
-// TODO 08. Create a new method to add a new item on the top of the list. Use the DataGenerator class to create the new item to be added.
 
 public class MainActivity extends AppCompatActivity {
 
     // Add the binder:
     private ActivityListMultiSelectionBinding binding;
 
-    private FloatingActionButton mFAB;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityListMultiSelectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //setContentView(R.layout.activity_list_multi_selection);
 
         initComponent();
+    }
+
+    // TODO 08. Create a new method to add a new item on the top of the list. Use the DataGenerator
+    //  class to create the new item to be added.
+    private void addItem(AdapterListBasic mAdapter) {
+        // Generate a new item and add to the top of the list:
+        Inbox tempEmail = DataGenerator.getRandomInboxItem(mAdapter.getContext());
+        mAdapter.addItem(0, tempEmail);
+
+        // Scroll to the new item in the list:
+        binding.recyclerView.scrollToPosition(0);
+    }
+
+    // TODO 07. Detect click events on the thumbnail located on the left of every list row when the
+    //  corresponding item is selected. Implement a new method to delete the corresponding item in
+    //  the list
+    private void selectionChange( View v, Inbox email, int position, AdapterListBasic mAdapter ) {
+        // Toggle the email selection:
+        email.toggleSelection();
+
+        if(email.isSelected()) {
+            v.findViewById(R.id.ivAvatar).setVisibility(View.INVISIBLE);
+            v.findViewById(R.id.ivTrash).setVisibility(View.VISIBLE);
+            v.setBackgroundColor(Color.LTGRAY);
+        } else {
+            v.findViewById(R.id.ivAvatar).setVisibility(View.VISIBLE);
+            v.findViewById(R.id.ivTrash).setVisibility(View.INVISIBLE);
+            v.setBackgroundColor(Color.WHITE);
+        }
+
+        ImageView mTrash = v.findViewById(R.id.ivTrash);
+        mTrash.setOnClickListener(v1 -> removeItem(position, mAdapter));
+    }
+    private void removeItem(int position, AdapterListBasic mAdapter) {
+        // Remove Item:
+        mAdapter.removeItem(position);
     }
 
     private void initComponent() {
@@ -66,24 +95,28 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
         // TODO 04. Define the layout of each item in the list
-        // TODO 05. Create a new Adapter class and the corresponding ViewHolder class in a different file. The adapter will be used to populate
-        //  the recyclerView and manage the interaction with the items in the list
+        // TODO 05. Create a new Adapter class and the corresponding ViewHolder class in a different
+        //          file. The adapter will be used to populate the recyclerView and manage the
+        //          interaction with the items in the list
         AdapterListBasic mAdapter = new AdapterListBasic(this, mailBox);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        // Get the reference to the RecyclerView:
+        RecyclerView recyclerView = binding.recyclerView;
 
+        // TODO 09. Create a new instance of the created Adapter class and bind it to the
+        //          RecyclerView instance created in step 03
+        // Connect the Layout Manager and Adapter to the RecyclerView:
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
 
-        // TODO 09. Create a new instance of the created Adapter class and bind it to the RecyclerView instance created in step 03
-        mFAB = findViewById(R.id.fab);
-        mFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO 10. Invoke the method created to a new item to the top of the list so it's
-                //  triggered when the user taps the Floating Action Button
-            }
+        // TODO 06. Detect click events on the list items. Implement a new method to toggle items'
+        //  selection in response to click events
+        mAdapter.setOnItemClickListener((v, email, position) -> selectionChange(v, email, position, mAdapter));
+
+        binding.fab.setOnClickListener(v -> {
+            // TODO 10. Invoke the method created to a new item to the top of the list so it's
+            //  triggered when the user taps the Floating Action Button
+            addItem(mAdapter);
         });
     }
-
 }

@@ -4,4 +4,8 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
         \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
     </string>
+    <string name="placeholder">PLACEHOLDER</string>
+    <string name="user_avatar">User Avatar</string>
+    <string name="delete_email">Delete Email</string>
+    <string name="add_email">Add Email</string>
 </resources>

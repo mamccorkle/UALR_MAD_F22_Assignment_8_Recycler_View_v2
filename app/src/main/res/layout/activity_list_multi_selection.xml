@@ -24,6 +24,7 @@
         app:backgroundTint="@color/blue_500"
         app:fabSize="normal"
         app:rippleColor="@color/blue_900"
-        app:srcCompat="@drawable/ic_add_circle_outline_24px" />
+        app:srcCompat="@drawable/ic_add_circle_outline_24px"
+        android:contentDescription="@string/add_email" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

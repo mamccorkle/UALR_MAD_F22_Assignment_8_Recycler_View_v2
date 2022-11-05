@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutParent"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activity_height"
+    android:background="?android:attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="@dimen/standard_80"
+        android:layout_height="@dimen/standard_80"
+        android:layout_marginStart="@dimen/standard_8"
+        android:foreground="@drawable/shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/ic_user"
+        android:contentDescription="@string/user_avatar" />
+
+    <TextView
+        android:id="@+id/tvSubject"
+        android:layout_width="@dimen/subject_width"
+        android:layout_height="@dimen/subject_height"
+        android:layout_marginStart="@dimen/standard_8"
+        android:layout_marginBottom="@dimen/standard_8"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingStart="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_small"
+        android:text="@string/lorem_ipsum"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatar" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="@dimen/name_width"
+        android:layout_height="@dimen/name_height"
+        android:layout_marginStart="@dimen/standard_8"
+        android:maxLines="1"
+        android:padding="@dimen/spacing_small"
+        android:text="@string/placeholder"
+        android:textAlignment="viewStart"
+        android:textSize="@dimen/text_size2"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvDate"
+        app:layout_constraintEnd_toStartOf="@+id/tvDate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatar" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="@dimen/date_width"
+        android:layout_height="@dimen/date_height"
+        android:layout_marginTop="@dimen/standard_8"
+        android:layout_marginEnd="@dimen/standard_8"
+        android:maxLines="1"
+        android:text="@string/placeholder"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/light_blue_200"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="@dimen/email_width"
+        android:layout_height="@dimen/email_height"
+        android:layout_marginStart="@dimen/standard_8"
+        android:paddingStart="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_small"
+        android:text="@string/placeholder"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toTopOf="@+id/tvSubject"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/divider_width"
+        android:layout_height="@dimen/spacing_tiny"
+        android:layout_marginStart="@dimen/standard_8"
+        android:layout_marginEnd="@dimen/standard_8"
+        android:layout_marginBottom="@dimen/spacing_xsmall"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivTrash"
+        android:layout_width="@dimen/trash_width"
+        android:layout_height="@dimen/trash_height"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/ivAvatar"
+        app:layout_constraintEnd_toEndOf="@+id/ivAvatar"
+        app:layout_constraintStart_toStartOf="@+id/ivAvatar"
+        app:layout_constraintTop_toTopOf="@+id/ivAvatar"
+        app:srcCompat="@drawable/ic_delete_forever_24"
+        app:tint="@color/blue_500"
+        android:contentDescription="@string/delete_email" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

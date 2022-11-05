@@ -8,13 +8,10 @@ public class Inbox {
     private int imageIndex;     // Assign an index value for the users image in an array of image resource values
     private boolean selected;
 
-    public Inbox() {
-        this.selected = false;
-    }
+    // Constructor:
+    public Inbox() { this.selected = false; }
 
-    public String getFrom() {
-        return from;
-    }
+    public String getFrom() { return from; }
 
     public void setFrom(String from) {
         this.from = from;
@@ -48,10 +45,6 @@ public class Inbox {
         return selected;
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
     public void toggleSelection() {
         this.selected = !this.selected;
     }
@@ -60,7 +53,5 @@ public class Inbox {
     public int getImageIndex() {
         return imageIndex;
     }
-    public void setImageIndex(int imageIndex) {
-        this.imageIndex = imageIndex;
-    }
+    public void setImageIndex(int imageIndex) { this.imageIndex = imageIndex; }
 }
