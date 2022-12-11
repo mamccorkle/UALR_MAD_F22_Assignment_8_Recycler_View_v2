@@ -1,21 +1,23 @@
 // https://github.com/UALR-MobileAppsDevelopmentCourse/assignment-06-mamccorkle
 //
-//  UALR - MAD - F22 - Assignment 6 - Android Recycler View
+//  UALR - MAD - F22 - Assignment 8 - Android Recycler View Continued
 //
-//  Project: UALR - Mobile Applications Development - Fall 2022 - Assignment 6 - Android Recycler View
-//  Created by: Mark McCorkle on 20221020
+//  Project: UALR - Mobile Applications Development - Fall 2022 - Assignment 8 - Android Recycler View Continued
+//  Created by: Mark McCorkle on 20221211
 //  Based on: Code Provided by Dr Ivan Rodriguez-Conde
 //
 //  IDE:
-//     Android Studio Chipmunk | 2021.2.1 Patch 2
-//     Build #AI-212.5712.43.2112.8815526, built on July 10, 2022
-//     Runtime version: 11.0.12+0-b1504.28-7817840 x86_64
-//     VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
-//     macOS 11.5.2
-//     GC: G1 Young Generation, G1 Old Generation
-//     Memory: 2048M
-//     Cores: 8
-//     Registry: external.system.auto.import.disabled=true
+//      Android Studio Dolphin | 2021.3.1 Patch 1
+//              Build #AI-213.7172.25.2113.9123335, built on September 29, 2022
+//              Runtime version: 11.0.13+0-b1751.21-8125866 x86_64
+//              VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
+//              macOS 11.5.2
+//              GC: G1 Young Generation, G1 Old Generation
+//              Memory: 2048M
+//              Cores: 8
+//              Registry:
+//              external.system.auto.import.disabled=true
+//              ide.text.editor.with.preview.show.floating.toolbar=false
 //
 package com.ualr.recyclerviewassignment;
 
