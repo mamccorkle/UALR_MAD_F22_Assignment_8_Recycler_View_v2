@@ -21,104 +21,85 @@
 //
 package com.ualr.recyclerviewassignment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.graphics.Color;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.ualr.recyclerviewassignment.Utils.DataGenerator;
-import com.ualr.recyclerviewassignment.adapter.AdapterListBasic;
+import com.google.android.material.snackbar.Snackbar;
 import com.ualr.recyclerviewassignment.databinding.ActivityListMultiSelectionBinding;
 
-import com.ualr.recyclerviewassignment.model.Inbox;
-
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     // Add the binder:
     private ActivityListMultiSelectionBinding binding;
 
+    InboxListFragment inboxFragment;
+
+    private static final String INBOX_FRAGMENT_TAG = "Inbox";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         binding = ActivityListMultiSelectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Home Devices");
+        setSupportActionBar(toolbar);
+
         initComponent();
     }
 
-    // TODO 08. Create a new method to add a new item on the top of the list. Use the DataGenerator
-    //  class to create the new item to be added.
-    private void addItem(AdapterListBasic mAdapter) {
-        // Generate a new item and add to the top of the list:
-        Inbox tempEmail = DataGenerator.getRandomInboxItem(mAdapter.getContext());
-        mAdapter.addItem(0, tempEmail);
-
-        // Scroll to the new item in the list:
-        binding.recyclerView.scrollToPosition(0);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 
-    // TODO 07. Detect click events on the thumbnail located on the left of every list row when the
-    //  corresponding item is selected. Implement a new method to delete the corresponding item in
-    //  the list
-    private void selectionChange( View v, Inbox email, int position, AdapterListBasic mAdapter ) {
-        // Toggle the email selection:
-        email.toggleSelection();
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.delete_action:
+                inboxFragment.deleteEmail();
 
-        if(email.isSelected()) {
-            v.findViewById(R.id.ivAvatar).setVisibility(View.INVISIBLE);
-            v.findViewById(R.id.ivTrash).setVisibility(View.VISIBLE);
-            v.setBackgroundColor(Color.LTGRAY);
-        } else {
-            v.findViewById(R.id.ivAvatar).setVisibility(View.VISIBLE);
-            v.findViewById(R.id.ivTrash).setVisibility(View.INVISIBLE);
-            v.setBackgroundColor(Color.WHITE);
+                // Create the Snackbar to be displayed to the user:
+                Snackbar snackbar = Snackbar.make(binding.getRoot(), "Email deleted...", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+                return true;
+            case R.id.forward_action:
+                inboxFragment.forwardEmail();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        ImageView mTrash = v.findViewById(R.id.ivTrash);
-        mTrash.setOnClickListener(v1 -> removeItem(position, mAdapter));
-    }
-    private void removeItem(int position, AdapterListBasic mAdapter) {
-        // Remove Item:
-        mAdapter.removeItem(position);
     }
 
-    private void initComponent() {
-        // TODO 01. Generate the item list to be displayed using the DataGenerator class
-        List<Inbox> mailBox = DataGenerator.getInboxData(this);
-        mailBox.addAll(DataGenerator.getInboxData(this));
+    private void initComponent()
+    {
+        // Create a new instance of the inbox fragment:
+        inboxFragment = new InboxListFragment();
 
-        // TODO 03. Do the setup of a new RecyclerView instance to display the item list properly
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        // Define the fragment manager so we can dynamically add the inbox fragment:
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        // TODO 04. Define the layout of each item in the list
-        // TODO 05. Create a new Adapter class and the corresponding ViewHolder class in a different
-        //          file. The adapter will be used to populate the recyclerView and manage the
-        //          interaction with the items in the list
-        AdapterListBasic mAdapter = new AdapterListBasic(this, mailBox);
+        // Replace the placeholder with the actual inbox fragment and assigning it a tag to refer to later:
+        ft.replace(R.id.fragment_placeholder, inboxFragment, INBOX_FRAGMENT_TAG);
 
-        // Get the reference to the RecyclerView:
-        RecyclerView recyclerView = binding.recyclerView;
+        // Apply the changes:
+        ft.commit();
 
-        // TODO 09. Create a new instance of the created Adapter class and bind it to the
-        //          RecyclerView instance created in step 03
-        // Connect the Layout Manager and Adapter to the RecyclerView:
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mAdapter);
-
-        // TODO 06. Detect click events on the list items. Implement a new method to toggle items'
-        //  selection in response to click events
-        mAdapter.setOnItemClickListener((v, email, position) -> selectionChange(v, email, position, mAdapter));
-
-        binding.fab.setOnClickListener(v -> {
-            // TODO 10. Invoke the method created to a new item to the top of the list so it's
-            //  triggered when the user taps the Floating Action Button
-            addItem(mAdapter);
-        });
+        // Set the on-click listener:
+        binding.fab.setOnClickListener(v -> inboxFragment.addEmail());
     }
 }

@@ -1,5 +1,6 @@
 package com.ualr.recyclerviewassignment.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,12 @@ import java.util.List;
 
 public class AdapterListBasic extends RecyclerView.Adapter {
     private List<Inbox> mItems;
-    private Context mContext;
+    private final Context mContext;
     private OnItemClickListener mOnItemClickListener;
 
     // Constructor:
-    public AdapterListBasic(Context context, List<Inbox> items) {
+    public AdapterListBasic(Context context, List<Inbox> items)
+    {
         this.mItems = items;
         this.mContext = context;
     }
@@ -30,7 +32,8 @@ public class AdapterListBasic extends RecyclerView.Adapter {
     //                             holder to represent an item:
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
         RecyclerView.ViewHolder vh;
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_v2, parent, false);
         vh = new InboxViewHolder(itemView);
@@ -40,7 +43,8 @@ public class AdapterListBasic extends RecyclerView.Adapter {
     // Required overridden method: This method is called when the layout manager is ready to display
     //                             a new particular view in the recycler view area
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)
+    {
         InboxViewHolder viewHolder = (InboxViewHolder) holder;
         Inbox i = mItems.get(position);
 
@@ -75,7 +79,8 @@ public class AdapterListBasic extends RecyclerView.Adapter {
 
     }
 
-    public void removeItem( int position ) {
+    public void removeItem( int position )
+    {
         // Check for out-of-bounds:
         if( position >= mItems.size() )
             return;
@@ -90,7 +95,8 @@ public class AdapterListBasic extends RecyclerView.Adapter {
         notifyItemRangeChanged( position, getItemCount() );
     }
 
-    public void addItem( int position, Inbox email ) {
+    public void addItem( int position, Inbox email )
+    {
         // Add the item to the list:
         mItems.add( email );
 
@@ -105,12 +111,21 @@ public class AdapterListBasic extends RecyclerView.Adapter {
         return this.mItems.size();
     }
 
-    public interface OnItemClickListener{
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateList(List<Inbox> inbox)
+    {
+        mItems = inbox;
+        notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener
+    {
         void onItemClick( View v, Inbox email, int position );
     }
 
-    public void setOnItemClickListener( final OnItemClickListener mItemClickListener ) {
-        this.mOnItemClickListener = mItemClickListener;
+    public void setOnItemClickListener( final OnItemClickListener mItemClickListener )
+    {
+        mOnItemClickListener = mItemClickListener;
     }
 
     public Context getContext() {
@@ -118,7 +133,8 @@ public class AdapterListBasic extends RecyclerView.Adapter {
     }
 
     // ViewHolder Internal Class:
-    public class InboxViewHolder extends RecyclerView.ViewHolder {
+    public class InboxViewHolder extends RecyclerView.ViewHolder
+    {
         public ImageView ivAvatar;
         public TextView tvName;
         public TextView tvSubject;
@@ -128,7 +144,8 @@ public class AdapterListBasic extends RecyclerView.Adapter {
         public View layoutParent;
 
         // ViewHolder Constructor:
-        public InboxViewHolder(View v) {
+        public InboxViewHolder(View v)
+        {
             super(v);
             ivAvatar = v.findViewById(R.id.ivAvatar);
             tvName = v.findViewById(R.id.tvName);
