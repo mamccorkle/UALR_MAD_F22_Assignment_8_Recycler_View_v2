@@ -10,6 +10,13 @@
     <dimen name="viewpager_margin_overlap">-60dp</dimen>
     <dimen name="viewpager_margin_overlap_payment">-30dp</dimen>
 
+    <dimen name="s0dp">0dp</dimen>
+    <dimen name="s8dp">8dp</dimen>
+    <dimen name="s16dp">16dp</dimen>
+
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_large">14sp</dimen>
+
     <!--genaral spacing-->
     <dimen name="spacing_tiny">1dp</dimen>
     <dimen name="spacing_xsmall">2dp</dimen>
@@ -50,5 +57,20 @@
     <dimen name="divider_width">406dp</dimen>
 
     <dimen name="activity_height">112dp</dimen>
+
+    <dimen name="s300dp">300dp</dimen>
+    <dimen name="s350dp">350dp</dimen>
+    <dimen name="s128dp">128dp</dimen>
+    <dimen name="s56dp">56dp</dimen>
+    <dimen name="s54dp">54dp</dimen>
+    <dimen name="s20dp">20dp</dimen>
+    <dimen name="s175dp">175dp</dimen>
+    <dimen name="s40dp">40dp</dimen>
+    <dimen name="s45dp">45dp</dimen>
+    <dimen name="s196dp">196dp</dimen>
+    <dimen name="s1dp">1dp</dimen>
+    <dimen name="s10dp">10dp</dimen>
+    <dimen name="s5dp">5dp</dimen>
+    <dimen name="s35dp">35dp</dimen>
 
 </resources>
